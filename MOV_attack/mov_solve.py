@@ -15,13 +15,13 @@ def AES_CBC_Decrypt(encrypted, key):
 
 def MOV_Attack(E, P1, P2):
 	"""
-    Solves the discrete logarithm problem using the MOV attack.
-    More information: Harasawa R. et al., "Comparing the MOV and FR Reductions in Elliptic Curve Cryptography" (Section 2)
+	Solves the discrete logarithm problem using the MOV attack.
+	More information: Harasawa R. et al., "Comparing the MOV and FR Reductions in Elliptic Curve Cryptography" (Section 2)
 	:param E: curve
-    :param P: the base point
-    :param R: the point multiplication result
-    :return: secret such that secret * P == R
-    """
+	:param P: the base point
+	:param R: the point multiplication result
+	:return: secret such that secret * P == R
+	"""
 	order = E.order() # order of curve
 	n = P1.order() # order of point P1
 
