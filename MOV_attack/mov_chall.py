@@ -36,6 +36,8 @@ def GenerateRandomCurve():
 
     curve = EllipticCurve(GF(p), [a, b])
 
+    assert curve.order() == p + 1 # curve is a supersingular curve when #E(f_p) == p + 1
+
     return curve
 
 # Main def
@@ -47,7 +49,7 @@ if __name__ == "__main__":
     secret = random.randint(1, P.order() - 1)
     # Print information of 2 points P and Q where Q = secret * P
     print("\n(+) Points: ")
-    print(f'{P = }\n')
+    print(f'{P = }')
     print(f'Q = {P * secret}')
 
     # open file to get plaintext
