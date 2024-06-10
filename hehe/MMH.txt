@@ -1,0 +1,8 @@
+MMH
+AES 128 192 256 lần lượt là 10 12 14 vòng
+Shift-rows thì dịch từng dòng sang 1,2,3,4,... lần
+a00 a01 a02 a03           -->      a00 a01 a02 a03
+a10 a11 a12 a13 	   	   a11 a12 a13 a10
+
+Mix-columns thì nhân  ma trận của cúng ta với ma trận M [[2 3 1 1],[1,2,3,1],[1,1,2,3],[3,1,1,2]]
+Để rev lại thì nhân M^-1 với ma trận cần rev
