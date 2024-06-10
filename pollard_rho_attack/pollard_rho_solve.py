@@ -59,8 +59,7 @@ def attack(P, Q, n):
     return x
 
 while True:
-    r = process(["python3", "server.sage.py"])
-    #r = remote('localhost', 6002)
+    r = process(["python3", "pollard_rho_chall.sage.py"])
     a,b,p,P,Q = getPara()
     E = EllipticCurve(GF(p), [a,b])
     n = E.order()
@@ -72,7 +71,7 @@ while True:
         print(x)    
         break
     except:
-        print("Polard-rho can't solve this!!!")
+        print("Polard-rho-solve can't solve!!!")
         break
 
 
@@ -90,4 +89,5 @@ print("IV:", iv)
 cipher = AES.new(key, AES.MODE_CBC, iv)
 with open("recovered.pdf", 'wb') as write:
     write.write(unpad(cipher.decrypt(ciphertext),16))
+print("Pollard rho attack successful")
 print("Generate recovered.pdf successfully!!!")
