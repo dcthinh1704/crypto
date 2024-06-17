@@ -59,7 +59,7 @@ def attack(P, Q, n):
     return x
 
 while True:
-    r = process(["python3", "pollard_rho_chall.sage.py"])
+    r = process(["python3", "pollard_rho_server.sage.py"])
     a,b,p,P,Q = getPara()
     E = EllipticCurve(GF(p), [a,b])
     n = E.order()
