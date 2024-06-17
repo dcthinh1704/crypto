@@ -12,7 +12,7 @@ def pad(m):
 def AES_CBC_Encrypt(flag, secret):
     # Set key & IV for AES CBC
     aes_key = secret.to_bytes(64, byteorder='little')[0:16]
-    IV = b'\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0'
+    IV = bytes.fromhex('656e6372797074696f6e496e74566563')
     cipher = AES.new(aes_key, AES.MODE_CBC, IV)
 
     encrypt_flag = cipher.encrypt(pad(flag).encode('utf-8'))
@@ -36,8 +36,7 @@ def GenerateRandomCurve():
 
     curve = EllipticCurve(GF(p), [a, b])
 
-    # check if order of curve equal to p
-    assert curve.order() == p
+    assert curve.order() == p # curve is a anomalous curve when p is prime and #E(F_p)==p
 
     return curve
 
@@ -50,7 +49,7 @@ if __name__ == "__main__":
     secret = random.randint(1, P.order() - 1)
     # Print information of 2 points P and Q where Q = secret * P
     print("\n(+) Points: ")
-    print(f'{P = }\n')
+    print(f'{P = }')
     print(f'Q = {P * secret}')
 
     # open file to get plaintext
