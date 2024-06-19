@@ -14,14 +14,6 @@ def AES_CBC_Decrypt(encrypted, key):
     return flag
 
 def MOV_Attack(E, P1, P2):
-	"""
-	Solves the discrete logarithm problem using the MOV attack.
-	More information: Harasawa R. et al., "Comparing the MOV and FR Reductions in Elliptic Curve Cryptography" (Section 2)
-	:param E: curve
-	:param P: the base point
-	:param R: the point multiplication result
-	:return: secret such that secret * P == R
-	"""
 	order = E.order() # order of curve
 	n = P1.order() # order of point P1
 
@@ -37,8 +29,6 @@ def MOV_Attack(E, P1, P2):
 	GK = EK(P1)
 
 	# find a point Q on extended elliptic curve EK which:
-	#   1. n / Q.order() => integer
-	#   2. n == Q.order()
 	while True:
 		R = EK.random_point()
 		m = R.order()
@@ -63,18 +53,18 @@ def MOV_Attack(E, P1, P2):
 
 if __name__ == "__main__":
 	# Curve parameters
-	p = 360481269686447805508492771017449225722776643 
-	a, b = 360481269686447805508492771017449225722776642, 0
+	p = 899400035654513474896152347474441353171234147 
+	a, b = 899400035654513474896152347474441353171234146, 0
 
 	# Define curve
 	E = EllipticCurve(GF(p), [a, b])
 
 	# Point informations
-	P1 = E(61026825449738433761663639920918850774100595 , 350847238598402202529546625353086265958183442)
-	P2 = E(230803928877731128195798317990821579463258039 , 287900469252208536285001176072346064362316265)
+	P1 = E(654091782186930182482649505926738454958454666 , 376137493156152746565800671049360734666492234)
+	P2 = E(343006103311194154573650500820107946735703357 , 416967131357776050595965944158988018189770568)
 
 	# Encrypted flag
-	enc = b'786e9da35d2d6c5a15f9cd11e4a123eab227b9dc6c8b87f62ef03ea421dff688fd0b1ca493609e63ab292652d2670df75a24688c0dae322ac458edd5d9df8845'
+	enc = b'f879eb3658c0379e2f050fee718d1a8ad0fdf41203cd011c6ea6e1c27f221707bc97fc419e83ffe8c1ca09d2de5f7cbf29740f1a24b233da9628ca46e92b836c'
 
 	# Attack to find secret with MOV method
 	secret = MOV_Attack(E, P1, P2)

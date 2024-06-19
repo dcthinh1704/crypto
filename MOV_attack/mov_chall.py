@@ -1,4 +1,5 @@
 from sage.all import * 
+from Crypto.Util.number import getPrime, isPrime
 import random 
 from hashlib import sha1
 from Crypto.Cipher import AES
@@ -19,15 +20,19 @@ def AES_CBC_Encrypt(flag, secret):
 
     return binascii.hexlify(encrypt_flag)
 
+def smooth_prime(b):
+	while True:
+		p = 4
+		for _ in range(6):
+			p *= getPrime(b)
+		p -= 1
+		if isPrime(p) and p%4 == 3:
+			return p
+
 def GenerateRandomCurve():
     # Curve params
-    with open("super_singular_curves.json", 'r') as f:
-        curves = json.loads(f.read())
-    index = randint(0, len(curves) -1 ) # Get random index of curve in json file
-
-    p = curves[index]['p']
-    a = curves[index]['a']
-    b = curves[index]['b']
+    p = smooth_prime(25)
+    a, b = p-1, 0
 
     print("\n(+) The curve parameters are:")
     print(f"p = {p}")
